@@ -145,7 +145,10 @@
 	<div id="menucontainer">
 		<div id='cssmenu'>
 			<ul>
-				<li class='active' id="tidyMenuItem"><a title="Ctrl-Enter" href='#'>Gherkin Editor</a>
+				<li class='active' id="tidyMenuItem" style="background-image: url('icons/icon48.png'); background-repeat: no-repeat;">
+					<a title="Ctrl-Enter" href='#'>
+						<div style="padding-left:40px;"> Gherkin Editor </div>
+					</a>
 					<li><a href="#">File</a>
 						<ul>
 							<li id="new_file"><a title="Ctrl-N" href='#'>New<span class="hint">Ctrl-N</span></a></li>
@@ -185,9 +188,9 @@
 			</ul>
 		</div>
 		<div class="toolbar">
-			<div><input placeholder="rows" class="input" id="rows"></input>
+			<div><input type="number" placeholder="rows" class="input" id="rows"></input>
 			</div>
-			<div><input placeholder="columns" class="input" id="cols"></input>
+			<div><input type="number" placeholder="cols" class="input" id="cols"></input>
 			</div>
 			<div>
 				<button class="blue" id="tableInsert" title="Insert a table after this line">Insert Table</button>

@@ -660,8 +660,9 @@ function insertColumn() {
 		//for every line above the current line to the start
 		for(i=current_line_num; i > -1; i--) {
 			//if we made it back to the start line
-			currentLineText = input
-			x.getLine(i);
+			// currentLineText = input
+			// x.getLine(i);
+			currentLineText = inputCodeMirror.getLine(i);
 			currentPipeCount = (currentLineText.split("|").length - 1);
 			//if the current line does not have the same number of pipes as the line we started on...
 			if(currentPipeCount != initialPipeCount && currentPipeCount > 0) {
@@ -1476,7 +1477,6 @@ function generateRubyStepDef(strStepType, strStepBody){
 }
 
 function generateJSStepDef(strStepType, strStepBody){
-	debugger;
 	var outputStepDef = {methodName:"", methodArgs:"", stepType:"", methodWhole:"", methodBody: ""};
 	var paramRegexp = /<([^<>]+)>/g;
 	var countParams = (strStepBody.match(paramRegexp) || []).length;
