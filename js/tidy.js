@@ -61,11 +61,11 @@ function insertBasicFramework(){
 }
 
 function launchSupport() {
-	window.open("mailto:aravind.pampana@siemens.com?Subject=Gherkin%20Editor%20Support");
+	window.open("mailto:aravindkumarmail@gmail.com?Subject=Gherkin%20Editor%20Support");
 }
 
 function launchReview() {
-	window.open("mailto:aravind.pampana@siemens.com?Subject=Gherkin%20Editor%20Review");
+	window.open("mailto:aravindkumarmail@gmail.com?Subject=Gherkin%20Editor%20Review");
 }
 
 // function launchRelated() {
