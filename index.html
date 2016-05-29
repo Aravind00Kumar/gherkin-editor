@@ -1,0 +1,260 @@
+<html>
+
+<head>
+	<link rel="stylesheet" href="css/menu.css">
+	<link type="text/css" rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/tooltip-theme-arrows.css" />
+	<title>Tidy Gherkin</title>
+	<script src="js/jquery-2.1.0.min.js"></script>
+	<link rel="stylesheet" href="lib/codemirror.css">
+	<link rel="stylesheet" href="css/messenger.css">
+	<link rel="stylesheet" href="css/messenger-theme-future.css">
+	<script src="lib/codemirror.js"></script>
+	<script src="addon/search/search.js"></script>
+	<script src="addon/search/searchcursor.js"></script>
+	<script src="addon/dialog/dialog.js"></script>
+	<link rel="stylesheet" href="addon/dialog/dialog.css" />
+	<script src="mode/gherkin/gherkin.js"></script>
+	<script src="mode/clike/clike.js"></script>
+	<script src="mode/ruby/ruby.js"></script>
+	<script src="mode/javascript/javascript.js"></script>
+	<script src="addon/display/placeholder.js"></script>
+	<script src="js/shortcut.js"></script>
+	<script src="js/tidy.js"></script>
+	<script src="js/options.js"></script>
+	<script src="js/tabs.js"></script>
+	<script src="js/menu.js"></script>
+	<script src="js/vex.js"></script>
+	<script src="js/vex.dialog.js"></script>
+	<script src="js/tether.min.js"></script>
+	<script src="js/drop.min.js"></script>
+	<script src="js/tooltip.js"></script>
+	<script src="js/messenger.js"></script>
+	<script src="js/messenger-theme-future.js"></script>
+	<link rel="stylesheet" href="css/vex.css" />
+	<link rel="stylesheet" href="css/vex-theme-os.css" />
+	<link rel="stylesheet" href="css/vex-theme-top.css" />
+	<link rel="stylesheet" href="css/vex-theme-default.css" />
+	<style>
+		body {
+			display: -webkit-flex;
+			-webkit-flex-direction: column;
+		}
+		
+		.dropping {
+			background: #ffcc00;
+		}
+		
+		nav {
+			display: -webkit-flex;
+			-webkit-justify-content: center;
+			-webkit-align-items: center;
+		}
+		
+		video {
+			width: 640px;
+			height: 480px;
+			background: rgba(0, 0, 0, 0.25);
+		}
+		
+		button {
+			display: inline-block;
+			background: -webkit-linear-gradient(#F9F9F9 40%, #E3E3E3 70%);
+			background: linear-gradient(#F9F9F9 40%, #E3E3E3 70%);
+			border: 1px solid #999;
+			-webkit-border-radius: 3px;
+			border-radius: 3px;
+			padding: 5px 8px;
+			outline: none;
+			white-space: nowrap;
+			-webkit-user-select: none;
+			user-select: none;
+			cursor: pointer;
+			font-weight: 700;
+			font-size: 10pt;
+		}
+		
+		button:not(:disabled):hover {
+			border-color: #bcd3f7;
+		}
+		
+		button:not(:disabled):active {
+			border: 1px solid #3477e6;
+			background: #3975d6;
+		}
+		
+		input,
+		textarea {
+			box-shadow: 1px 1px 5px #ccc inset;
+			border: none;
+			padding: 1em;
+		}
+		
+		[readonly] {
+			background: #eee;
+		}
+		
+		[hidden] {
+			display: none;
+		}
+		
+		textarea {
+			width: 100%;
+			height: 100%;
+			outline: none;
+			padding: 1px;
+			font-size: 14pt;
+			padding: 1em;
+		}
+		
+		output {
+			text-align: center;
+			padding: 1em;
+			display: block;
+		}
+		
+		#pageContent {
+			display: flex;
+			flex-direction: row;
+			align-content: stretch;
+		}
+		
+		#pageContent.h {
+			flex-direction: column;
+		}
+		
+		#pageContent.h .item {
+			height: calc(50% - 55px);
+			flex-grow: 1;
+			width: 100%;
+		}
+		
+		#pageContent .item {
+			width: 50%;
+			flex-grow: 1;
+			height: calc(100% - 110px);
+		}
+		
+		.tab {
+			height: calc(100% - 43px)
+		}
+	</style>
+</head>
+
+<body>
+	<div id="menucontainer">
+		<div id='cssmenu'>
+			<ul>
+				<li class='active' id="tidyMenuItem"><a title="Ctrl-Enter" href='#'>Gherkin Editor</a>
+					<li><a href="#">File</a>
+						<ul>
+							<li id="new_file"><a title="Ctrl-N" href='#'>New<span class="hint">Ctrl-N</span></a></li>
+							<li id="save_file_as"><a title="Ctrl-Alt-S" href='#'>Save As<span class="hint">Ctrl-Alt-S</span></a></li>
+							<li id="save_file"><a title="Ctrl-S" href='#'>Save<span class="hint">Ctrl-S</span></a></li>
+							<li id="choose_file"><a title="Ctrl-O" href='#'>Open<span class="hint">Ctrl-O</span></a></li>
+						</ul>
+					</li>
+					<li><a href="#">Edit</a>
+						<ul>
+							<li id="edit_find"><a title="Ctrl-F" href='#'>Find<span class="hint">Ctrl-F</span></a></li>
+							<li id="edit_find_next"><a title="Ctrl-G" href='#'>Find Next<span class="hint">Ctrl-G</span></a></li>
+							<li id="edit_find_previous"><a title="Ctrl-Shift-G" href='#'>Find Previous<span class="hint">Ctrl-Shift-G</span></a></li>
+							<li id="edit_replace"><a title="Ctrl-Shift-F" href='#'>Replace<span class="hint">Ctrl-Shift-F</span></a></li>
+							<li id="edit_replace_all"><a title="Ctrl-Shift-R" href='#'>Replace All<span class="hint">Ctrl-Shift-R</span></a></li>
+						</ul>
+					</li>
+					<li class='active'><a href='#'>Insert</a>
+						<ul>
+							<li id="insertFramework"><a title="Ctrl-Shift-T" href='#'>Starter for ten<span class="hint">Ctrl-Shift-T</span></a></li>
+							<li id="insertScenario"><a title="Ctrl-Shift-S" href='#'>Scenario<span class="hint">Ctrl-Shift-S</span></a></li>
+							<li id="insertScenarioOutline"><a title="Ctrl-Shift-O" href='#'>Scenario Outline<span class="hint">Ctrl-Shift-O</span></a></li>
+						</ul>
+					</li>
+					<li><a href="#">Support</a>
+						<ul>
+							<li id="supportLink"><a class="email-link" href='#'>@Aravind</a></li>
+						</ul>
+					</li>
+					<li><a href="#">About</a>
+						<ul>
+							<li id="versionInfo"><a href='#'>Version Info</a></li>
+							<li id="reviewLink"><a class="external-link" href='#'>Write a review</a></li>
+						</ul>
+					</li>
+					<li id="settingsOption"><a href='#'>Settings</a></li>
+			</ul>
+		</div>
+		<div class="toolbar">
+			<div><input placeholder="rows" class="input" id="rows"></input>
+			</div>
+			<div><input placeholder="columns" class="input" id="cols"></input>
+			</div>
+			<div>
+				<button class="blue" id="tableInsert" title="Insert a table after this line">Insert Table</button>
+			</div>
+			<div style="position: absolute;">
+				<button class="blue icon" id="insertRowAfter" data-tooltip="Click in a row of a table and press this to insert a blank row after"
+					data-tooltip-position="right middle"><img src="images/add-row.png" /></button>
+			</div>
+			<div style="position: absolute; margin-left: 50px;">
+				<button class="blue icon" id="insertColAfter" data-tooltip="Click in a column of a table and press this to insert a blank column after"
+					data-tooltip-position="right middle"><img src="images/add-col.png" /></button>
+			</div>
+
+			<div style="position: absolute; margin-left: 120px;">
+				<button class="blue icon" id="rowView" data-tooltip="Click to change the view to row view" data-tooltip-position="right middle"><img src="images/row-view.png" /></button>
+			</div>
+			<div style="position: absolute; margin-left: 170px;">
+				<button class="blue icon" id="colView" data-tooltip="Click to change the view to column view" data-tooltip-position="right middle"><img src="images/col-view.png" /></button>
+			</div>
+		</div>
+	</div>
+	<div class="pagewrapper" id="pageContent">
+		<div class="item">
+			<div class="container">
+				<div id="errors"></div>
+				<span id="file_path" class="file-info"></span><span class="file-info" id="file_size"></span>
+				<div id="tips"></div>
+				<textarea autofocus placeholder="Enter your Gherkin here..." id="inputgherkin"></textarea>
+			</div>
+		</div>
+		<div class="item">
+			<div class="tabSelection">
+				<ul class="tabs-menu">
+					<li class="current"><a href="#tab-1"><span class="fieldlabel">Preview</span></a></li>
+					<li><a href="#tab-4"><span class="fieldlabel">JS Steps</span></a></li>
+					<!--<li><a href="#tab-2"><span class="fieldlabel">Java Steps</span></a></li>
+					<li><a href="#tab-3"><span class="fieldlabel">Ruby Steps</span></a></li>-->
+				</ul>
+			</div>
+			<div class="tab">
+				<div id="tab-1" class="tab-content">
+					<div class="container" id="transformedOutput">
+						<textarea placeholder="See the tidied output here..." readonly id="outputgherkin"></textarea>
+					</div>
+				</div>
+				<div id="tab-2" class="tab-content">
+					<div class="container" id="stepDefsOutput">
+						<textarea placeholder="See your generated Java step definitions here..." readonly id="javasteps"></textarea>
+					</div>
+				</div>
+				<div id="tab-3" class="tab-content">
+					<div class="container" id="rubyStepDefsOutput">
+						<textarea placeholder="See your generated Ruby step definitions here..." readonly id="rubysteps"></textarea>
+					</div>
+				</div>
+				<div id="tab-4" class="tab-content">
+					<div class="container" id="jsStepDefsOutput">
+						<textarea placeholder="See your generated Javascript step definitions here..." readonly id="jssteps"></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	</div>
+	<script src="js/dnd.js"></script>
+	<script src="js/app.js"></script>
+</body>
+
+</html>

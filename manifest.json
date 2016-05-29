@@ -1,0 +1,27 @@
+{
+   "app": {
+      "background": {
+         "scripts": [ "js/background.js" ]
+      }
+   },
+   "description": "Keep your Gherkin feature files consistent in layout, take the pain out of table formatting and cucumber step generation",
+   "file_handlers": {
+      "text": {
+         "extensions": [ "feature" ],
+         "types": [ "text/feature" ]
+      }
+   },
+   "icons": {
+      "128": "icons/icon128.png",
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png"
+   },
+   "manifest_version": 2,
+   "minimum_chrome_version": "31",
+   "name": "Gherkin Editor",
+   "permissions": [ "syncFileSystem", {
+      "fileSystem": [ "write", "retainEntries", "directory" ]
+   }, "storage" ],
+//    "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "0.1.1"
+}
