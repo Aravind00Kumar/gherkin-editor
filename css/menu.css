@@ -53,7 +53,7 @@
   display: none;
 }
 #cssmenu {
-  font-family: Montserrat, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;;
   background: #333333;
 }
 #cssmenu > ul > li {
